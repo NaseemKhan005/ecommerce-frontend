@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import { Marck_Script } from "next/font/google";
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
+import "swiper/css/navigation";
 
 import { urlFor } from "@/lib/client";
 import CommonButton from "./CommonButton";
@@ -13,21 +14,17 @@ import CommonButton from "./CommonButton";
 const marckScript = Marck_Script({ subsets: ["latin"], weight: ["400"] });
 
 const HeroBanner = ({ bannerData }: any) => {
-  const backgroundImage = {
-    backgroundImage: `url('${urlFor(bannerData[0].bgImage.asset)}')`,
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center center",
-  };
-
   return (
-    <Swiper slidesPerView={1} loop={true} autoplay={{ delay: 2000 }}>
-      <div className="flex items-center flex-col gap-2 md:gap-3 w-fit absolute top-1/2 -translate-y-1/2 md:left-10 left-2">
-        <MdKeyboardArrowUp className="text-2xl md:text-4xl cursor-pointer" />
-        <p className="text-lg md:text-xl">01</p>
-        <MdKeyboardArrowDown className="text-2xl md:text-4xl cursor-pointer" />
-      </div>
-
+    <Swiper
+      className="mySwiper"
+      modules={[Autoplay]}
+      slidesPerView={1}
+      loop={true}
+      autoplay={{
+        delay: 2500,
+        disableOnInteraction: false,
+      }}
+    >
       {bannerData.map((item: any) => (
         <SwiperSlide>
           <div

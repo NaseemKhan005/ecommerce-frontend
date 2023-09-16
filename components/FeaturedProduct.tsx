@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
+import "swiper/css/navigation";
 import { urlFor } from "@/lib/client";
 
 interface bestSellInterface {
@@ -14,6 +16,13 @@ const FeaturedProduct = ({ productData }: bestSellInterface) => {
   return (
     <div className="w-full mx-auto cursor-pointer">
       <Swiper
+        className="mySwiper"
+        modules={[Autoplay]}
+        loop={true}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
         breakpoints={{
           0: {
             slidesPerView: 1,
@@ -28,7 +37,6 @@ const FeaturedProduct = ({ productData }: bestSellInterface) => {
             spaceBetween: 30,
           },
         }}
-        loop={true}
       >
         {productData.map(
           (product: any) =>

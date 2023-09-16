@@ -1,8 +1,11 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 import Image from "next/image";
 
 import "swiper/css";
+import "swiper/css/navigation";
+
 import Title from "./Title";
 import { urlFor } from "@/lib/client";
 import DiscountButton from "./DiscountButton";
@@ -41,6 +44,12 @@ const BestSell = ({ productData }: bestSellInterface) => {
               spaceBetween: 35,
             },
           }}
+          className="mySwiper"
+          modules={[Autoplay]}
+          autoplay={{
+            delay: 4000,
+            disableOnInteraction: false,
+          }}
           loop={true}
         >
           {productData.map((product: any) => {
@@ -58,7 +67,7 @@ const BestSell = ({ productData }: bestSellInterface) => {
             return (
               bestSell && (
                 <SwiperSlide>
-                  <div className="relative w-full flex flex-col gap-5">
+                  <div className="relative w-full flex flex-col gap-5 cursor-pointer">
                     <div className="bg-black/5">
                       <Image
                         src={`${urlFor(image[0].asset)}`}

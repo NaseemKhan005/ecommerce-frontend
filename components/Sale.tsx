@@ -3,8 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
+import "swiper/css/navigation";
 import { urlFor } from "@/lib/client";
 
 interface saleDataProps {
@@ -14,7 +16,17 @@ interface saleDataProps {
 const Deals = ({ saleData }: saleDataProps) => {
   return (
     <div className="relative w-full h-96 2xl:container 2xl:px-10 2xl:mx-auto px-2 my-20">
-      <Swiper slidesPerView={1} spaceBetween={10} loop={true}>
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={10}
+        loop={true}
+        className="mySwiper"
+        modules={[Autoplay]}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+      >
         {saleData.map((item: any) => {
           const {
             _id,
