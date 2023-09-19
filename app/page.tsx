@@ -1,6 +1,7 @@
 import AllProducts from "@/components/AllProducts";
 import BestSell from "@/components/BestSell";
 import FeaturedProduct from "@/components/FeaturedProduct";
+import Footer from "@/components/Footer";
 import HeroBanner from "@/components/HeroBanner";
 import Sale from "@/components/Sale";
 import { client } from "@/lib/client";
@@ -21,9 +22,7 @@ export default async function Home() {
       <BestSell productData={productData} />
       <Sale saleData={saleData} />
       <AllProducts productData={productData} />
-
-      {/* <div className="container px-5 md:px-10 xl:px-20 mx-auto flex flex-col gap-24">
-      </div> */}
+      <Footer />
     </main>
   );
 }

@@ -15,7 +15,7 @@ interface saleDataProps {
 
 const Deals = ({ saleData }: saleDataProps) => {
   return (
-    <div className="relative w-full h-96 2xl:h-[27rem] 2xl:container 2xl:px-10 2xl:mx-auto px-2 mb-20">
+    <div className="relative w-full h-96 2xl:h-[27rem] 2xl:container 2xl:px-10 2xl:mx-auto px-2 mb-16">
       <Swiper
         slidesPerView={1}
         spaceBetween={10}
