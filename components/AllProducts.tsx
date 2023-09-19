@@ -5,11 +5,7 @@ interface AllProductProps {
 }
 
 const AllProducts = ({ productData }: AllProductProps) => {
-  const sortedData = productData.sort(
-    (a, b) => new Date(b._createdAt) - new Date(a._createdAt)
-  );
-
-  const newestProducts = sortedData.slice(0, 8);
+  const products = productData.slice(0, 8);
 
   return (
     <div className="flex flex-col gap-10 relative w-full 2xl:container px-5 md:px-10 2xl:mx-auto">
@@ -25,7 +21,7 @@ const AllProducts = ({ productData }: AllProductProps) => {
         </div>
 
         <div className="grid items-center sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 sm:gap-y-10 gap-y-5">
-          {newestProducts.map((product: any) => {
+          {products.map((product: any) => {
             return (
               product && <Product key={product._id} product={...product} />
             );
