@@ -15,7 +15,7 @@ interface saleDataProps {
 
 const Deals = ({ saleData }: saleDataProps) => {
   return (
-    <div className="relative w-full h-96 2xl:container 2xl:px-10 2xl:mx-auto px-2 my-20">
+    <div className="relative w-full h-96 2xl:h-[27rem] 2xl:container 2xl:px-10 2xl:mx-auto px-2 mb-20">
       <Swiper
         slidesPerView={1}
         spaceBetween={10}
@@ -43,9 +43,8 @@ const Deals = ({ saleData }: saleDataProps) => {
           } = item;
 
           return (
-            <SwiperSlide>
+            <SwiperSlide key={_id}>
               <div
-                key={_id}
                 className="w-full h-full p-5 md:p-10 rounded-xl relative flex flex-col sm:flex-row cursor-pointer gap-5 md:gap-10 justify-between sm:mt-20 md:mt-28 sm:mb-10 text-white"
                 style={{ backgroundColor: bgColor, color: textColor }}
               >

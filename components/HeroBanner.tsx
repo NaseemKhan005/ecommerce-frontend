@@ -16,19 +16,18 @@ const marckScript = Marck_Script({ subsets: ["latin"], weight: ["400"] });
 const HeroBanner = ({ bannerData }: any) => {
   return (
     <Swiper
-      className="mySwiper"
-      modules={[Autoplay]}
       slidesPerView={1}
+      className="mySwiper w-full h-1/2 lg:min-h-screen relative"
+      modules={[Autoplay]}
       loop={true}
       autoplay={{
-        delay: 2500,
+        delay: 4000,
         disableOnInteraction: false,
       }}
     >
-      {bannerData.map((item: any) => (
-        <SwiperSlide>
+      {bannerData.map((item: any, index: number) => (
+        <SwiperSlide key={index}>
           <div
-            className={`w-full h-1/2 lg:min-h-screen relative`}
             style={{
               backgroundImage: `url('${urlFor(item.bgImage.asset)}')`,
               backgroundSize: "cover",

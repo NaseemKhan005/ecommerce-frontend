@@ -1,23 +1,21 @@
 "use client";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import Image from "next/image";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
 import Title from "./Title";
-import { urlFor } from "@/lib/client";
-import DiscountButton from "./DiscountButton";
-import StockButton from "./StockButton";
+import Product from "./Product";
 
-interface bestSellInterface {
+interface bestSellProps {
   productData: [];
 }
 
-const BestSell = ({ productData }: bestSellInterface) => {
+const BestSell = ({ productData }: bestSellProps) => {
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-10 relative w-full 2xl:container px-5 md:px-10 2xl:mx-auto">
       <Title
         title="Best Sell"
         desc=" Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -31,17 +29,13 @@ const BestSell = ({ productData }: bestSellInterface) => {
               slidesPerView: 1,
               spaceBetween: 10,
             },
-            640: {
+            650: {
               slidesPerView: 2,
               spaceBetween: 15,
             },
             1024: {
               slidesPerView: 3,
-              spaceBetween: 25,
-            },
-            1580: {
-              slidesPerView: 4,
-              spaceBetween: 35,
+              spaceBetween: 20,
             },
           }}
           className="mySwiper"
@@ -53,56 +47,10 @@ const BestSell = ({ productData }: bestSellInterface) => {
           loop={true}
         >
           {productData.map((product: any) => {
-            const {
-              bestSell,
-              image,
-              category,
-              name,
-              discountPrice,
-              actualPrice,
-              stock,
-              discount,
-            } = product;
-
             return (
-              bestSell && (
-                <SwiperSlide>
-                  <div className="relative w-full flex flex-col gap-5 cursor-pointer">
-                    <div className="bg-black/5">
-                      <Image
-                        src={`${urlFor(image[0].asset)}`}
-                        alt="featured image"
-                        width={500}
-                        height={500}
-                        className="w-full h-full object-contain object-center mix-blend-multiply"
-                      />
-                    </div>
-                    <div>
-                      <span className="text-sm text-light-black/60 dark:text-white/60 capitalize">
-                        {category}
-                      </span>
-                      <p className="font-[500] capitalize">{name}</p>
-                      {!(discountPrice && discountPrice.length) ? (
-                        <div className="flex items-center gap-4">
-                          <p className="font-semibold text-light-black/80 dark:text-white">
-                            ${discountPrice}.00
-                          </p>
-                          <s className="text-sm text-light-black/60 dark:text-white/60">
-                            ${actualPrice}.00
-                          </s>
-                        </div>
-                      ) : (
-                        <p className="font-semibold text-light-black/80">
-                          ${actualPrice}.00
-                        </p>
-                      )}
-                    </div>
-
-                    {stock && discount && discount.length && (
-                      <DiscountButton text={discount} />
-                    )}
-                    {!stock && <StockButton />}
-                  </div>
+              product.bestSell && (
+                <SwiperSlide key={product._id}>
+                  <Product product={...product} />
                 </SwiperSlide>
               )
             );

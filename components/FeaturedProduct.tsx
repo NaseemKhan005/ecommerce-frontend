@@ -41,7 +41,7 @@ const FeaturedProduct = ({ productData }: bestSellInterface) => {
         {productData.map(
           (product: any) =>
             product.featuredProduct && (
-              <SwiperSlide>
+              <SwiperSlide key={product._id}>
                 <div className="relative w-full h-80 bg-[#EEF6FF]">
                   <Image
                     src={`${urlFor(product.image[0].asset)}`}

@@ -10,10 +10,14 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { NavLinks } from "@/constants/NavLinks";
-import { ToggleTheme } from "./ToggleTheme";
+import Search from "./Search";
+import Cart from "./Cart";
 
 const Navbar = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [searchIsOpen, setSearchIsOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   const pathname = usePathname();
   const navbar = useRef<HTMLDivElement | null>(null);
 
@@ -85,18 +89,30 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-2">
-          {/* <ToggleTheme /> */}
-          <span className="hover:text-orange dark:hover:text-orange cursor-pointer rounded-full text-2xl dark:text-black">
+          <span
+            onClick={() => setSearchIsOpen(true)}
+            className="hover:text-orange dark:hover:text-orange cursor-pointer rounded-full text-2xl dark:text-black"
+          >
             <LuSearch />
           </span>
-          <div className="cursor-pointer flex items-center gap-1 hover:text-orange dark:hover:text-orange relative">
+          <Search
+            searchIsOpen={searchIsOpen}
+            setSearchIsOpen={setSearchIsOpen}
+          />
+
+          <div
+            onClick={() => setIsCartOpen(!isCartOpen)}
+            className="cursor-pointer flex items-center gap-1 hover:text-orange dark:hover:text-orange relative"
+          >
             <span className=" dark:hover:text-orange hover:text-orange rounded-full text-2xl dark:text-black">
               <AiOutlineShoppingCart />
             </span>
-            <p className="absolute -top-2 -right-2 bg-orange text-white rounded-full w-5 h-5 text-xs flex items-center justify-center">
+            <p className="absolute -top-2 -right-2 bg-orange text-white rounded-full w-5 h-5 text-[11px] flex items-center justify-center">
               10
             </p>
           </div>
+          <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
+
           <span
             onClick={() => setMenuIsOpen(true)}
             className="cursor-pointer rounded-full md:hidden text-2xl dark:text-black  dark:hover:text-orange hover:text-orange"
