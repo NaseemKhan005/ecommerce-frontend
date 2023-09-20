@@ -5,8 +5,6 @@ interface AllProductProps {
 }
 
 const AllProducts = ({ productData }: AllProductProps) => {
-  const products = productData.slice(0, 8);
-
   return (
     <div className="flex flex-col gap-10 relative w-full 2xl:container px-5 md:px-10 2xl:mx-auto">
       <div className="flex flex-col gap-12 mt-10">
@@ -21,7 +19,7 @@ const AllProducts = ({ productData }: AllProductProps) => {
         </div>
 
         <div className="grid items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 sm:gap-y-10 gap-y-5">
-          {products.map((product: any) => {
+          {productData.slice(0, 8).map((product: any) => {
             return (
               product && <Product key={product._id} product={...product} />
             );

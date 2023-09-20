@@ -100,3 +100,7 @@
 .cart::-webkit-scrollbar-thumb {
   background-color: #f3f3f3;
 }
+
+.productDetails::-webkit-scrollbar {
+  height: 0;
+}

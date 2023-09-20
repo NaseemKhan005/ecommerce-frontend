@@ -22,7 +22,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: any) => {
       ></span>
       <div
         className={cn(
-          "w-[22rem] bg-white shadow-lg shadow-black/10 absolute top-10 -right-5 overflow-y-auto overflow-hidden transition-all duration-500",
+          "w-[330px] sm:w-[22rem] bg-white shadow-lg shadow-black/10 absolute top-10 -right-10 sm:-right-5 overflow-y-auto overflow-hidden transition-all duration-500",
           isCartOpen ? "h-[29rem]" : "h-0"
         )}
       >
@@ -82,7 +82,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }: any) => {
                 </div>
                 <CommonButton
                   text="pay with stripe"
-                  customClasses="w-full bg-orange text-white hover:bg-[#e94848] py-6 rounded before:w-4 after:w-0"
+                  customClasses="w-full bg-orange text-white hover:bg-[#d93237] py-6 rounded before:w-4 after:w-0"
                 />
               </div>
             </div>
