@@ -1,19 +1,13 @@
-// "use client";
-
 import Image from "next/image";
 import { AiFillStar, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-// import { useState } from "react";
 
 import { client, urlFor } from "@/lib/client";
 import { cn } from "@/lib/utils";
-import StockButton from "@/components/StockButton";
 import CommonButton from "@/components/CommonButton";
 import Product from "@/components/Product";
 import ProductDetailsImage from "@/components/ProductDetailsImage";
 
 const ProductDetails = async ({ params: { slug } }: any) => {
-  // const [addItems, setAddItems] = useState(1);
-
   const productsQuery = '*[_type == "product"]';
   const productQuery = `*[_type == 'product' && slug.current == '${slug}'][0]`;
 
@@ -55,16 +49,7 @@ const ProductDetails = async ({ params: { slug } }: any) => {
             </p>
           </div>
           <h3 className="font-semibold mt-2">Details:</h3>
-          <p className="text-sm text-light-black lg:text-base">
-            {details} Set your mind ablaze with boAt Rockerz 450 — our slick
-            headphones that offer immersive sound quality and add luxury to your
-            sound. Propelled by crystal clear 40mm dynamic drivers, slip into an
-            alternate HD immersive audio reality. The soft cornered matte black
-            finish allows for a comfortable fit, propagated by plush foam in
-            adaptive and adjustable design. Choose your mode, go wireless with
-            Bluetooth V4.2 or connect an aux wire that doesn't cause any drain
-            on the 300mAh rechargeable lithium battery.
-          </p>
+          <p className="text-sm text-light-black lg:text-base">{details}</p>
 
           <div className="flex items-end gap-2 my-2">
             <p className="text-xl font-semibold">${discountPrice}.00</p>
@@ -85,18 +70,9 @@ const ProductDetails = async ({ params: { slug } }: any) => {
             <h3 className="font-semibold text-xl">Quantity:</h3>
 
             <div className="flex items-center justify-between w-[120px] border rounded-full">
-              <AiOutlineMinus
-                // onClick={() => setAddItems(addItems - 1)}
-                className="cursor-pointer text-red-600 hover:bg-red-600/20 text-3xl p-1 pl-2 rounded-l-full"
-              />
-              <span>
-                {/* {addItems <= 0 ? `${setAddItems(addItems + 1)}` : addItems} */}
-                1
-              </span>
-              <AiOutlinePlus
-                // onClick={() => setAddItems(addItems + 1)}
-                className="text-green-500 hover:bg-green-500/20 cursor-pointer text-3xl p-1 pr-2 rounded-r-full"
-              />
+              <AiOutlineMinus className="cursor-pointer text-red-600 hover:bg-red-600/20 text-3xl p-1 pl-2 rounded-l-full" />
+              <span>1</span>
+              <AiOutlinePlus className="text-green-500 hover:bg-green-500/20 cursor-pointer text-3xl p-1 pr-2 rounded-r-full" />
             </div>
           </div>
 
