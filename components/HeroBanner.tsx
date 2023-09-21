@@ -61,7 +61,7 @@ const HeroBanner = ({ bannerData }: any) => {
                   </p>
                 </div>
                 <div className="mx-auto sm:mx-0">
-                  <CommonButton text={item.btnText} />
+                  <CommonButton stock={true} text={item.btnText} />
                 </div>
               </div>
             </div>

@@ -25,7 +25,7 @@ const ProductDetailsImage = ({ name, stock, image }: productDetailsProps) => {
           width={500}
           height={500}
           alt={name}
-          className="rounded-xl w-full sm:w-[400px] md:w-[500px] lg:w-[600px] object-cover object-center mix-blend-multiply"
+          className="rounded-xl w-full sm:w-[400px] md:w-[500px] lg:w-[600px] aspect-square object-cover object-center mix-blend-multiply"
         />
       </div>
 

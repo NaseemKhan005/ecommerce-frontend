@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 import CommonButton from "@/components/CommonButton";
 import Product from "@/components/Product";
 import ProductDetailsImage from "@/components/ProductDetailsImage";
+import QuantityButtons from "@/components/QuantityButtons";
+import ProductDetailsButtons from "@/components/ProductDetailsButtons";
 
 const ProductDetails = async ({ params: { slug } }: any) => {
   const productsQuery = '*[_type == "product"]';
@@ -69,24 +71,16 @@ const ProductDetails = async ({ params: { slug } }: any) => {
           <div className="flex items-center gap-3 mt-1 lg:mt-3 mb-3 lg:mb-6">
             <h3 className="font-semibold text-xl">Quantity:</h3>
 
-            <div className="flex items-center justify-between w-[120px] border rounded-full">
-              <AiOutlineMinus className="cursor-pointer text-red-600 hover:bg-red-600/20 text-3xl p-1 pl-2 rounded-l-full" />
-              <span>1</span>
-              <AiOutlinePlus className="text-green-500 hover:bg-green-500/20 cursor-pointer text-3xl p-1 pr-2 rounded-r-full" />
-            </div>
+            <QuantityButtons />
           </div>
 
-          <div className="flex items-center gap-8">
-            <CommonButton
-              text="Buy now"
-              customClasses="w-fit py-6 before:w-4 after:w-0 rounded text-base capitalize"
-            />
+          <ProductDetailsButtons stock={stock} product={product} />
 
-            <CommonButton
-              text="Add to cart"
-              customClasses="w-fit bg-orange text-white py-6 rounded before:w-4 after:w-0"
-            />
-          </div>
+          {!stock && (
+            <p className="select-none text-xs mt-1 text-orange">
+              Sorry! The prodcut is out of stock
+            </p>
+          )}
         </div>
       </div>
 

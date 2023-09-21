@@ -12,11 +12,18 @@ import { useEffect, useRef, useState } from "react";
 import { NavLinks } from "@/constants/NavLinks";
 import Search from "./Search";
 import Cart from "./Cart";
+import { useStateContext } from "@/context/StateContext";
 
 const Navbar = () => {
-  const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [searchIsOpen, setSearchIsOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const {
+    showNavbar,
+    setShowNavbar,
+    showCart,
+    setShowCart,
+    totalQuantities,
+  }: any = useStateContext();
 
   const pathname = usePathname();
   const navbar = useRef<HTMLDivElement | null>(null);
@@ -61,8 +68,8 @@ const Navbar = () => {
         </Link>
 
         <div
-          className={`flex md:items-center md:justify-center md:flex-row flex-col gap-4 lg:gap-10 flex-1 fixed md:relative md:right-0 top-0 w-full sm:w-80 md:w-auto h-screen md:h-auto px-10 pt-28 md:p-0 bg-white dark:bg-black md:bg-transparent md:dark:bg-transparent z-[80] transition-all duration-700 ${
-            menuIsOpen ? "right-0" : "-right-[150%]"
+          className={`flex md:items-center md:justify-center md:flex-row flex-col gap-4 lg:gap-10 flex-1 fixed md:relative md:right-0 top-0 w-full sm:w-80 md:w-auto h-screen md:h-auto px-10 pt-28 md:p-0 bg-white dark:bg-black md:bg-transparent md:dark:bg-transparent z-[80] transition-all duration-700 shadow-light-black/10 shadow-xl drop-shadow-2xl md:shadow-none md:drop-shadow-none ${
+            showNavbar ? "right-0" : "-right-[150%]"
           }`}
         >
           {NavLinks.map((item) => (
@@ -81,7 +88,7 @@ const Navbar = () => {
           ))}
 
           <span
-            onClick={() => setMenuIsOpen(false)}
+            onClick={() => setShowNavbar(false)}
             className="block md:hidden text-xl p-2 dark:hover:text-orange hover:text-orange bg-light-black text-white absolute top-10 right-10 cursor-pointer rounded-full hover:rotate-180 transition-all duration-500"
           >
             <IoClose />
@@ -101,20 +108,20 @@ const Navbar = () => {
           />
 
           <div
-            onClick={() => setIsCartOpen(!isCartOpen)}
+            onClick={() => setShowCart(!showCart)}
             className="cursor-pointer flex items-center gap-1 hover:text-orange dark:hover:text-orange relative"
           >
             <span className=" dark:hover:text-orange hover:text-orange rounded-full text-2xl dark:text-black">
               <AiOutlineShoppingCart />
             </span>
             <p className="absolute -top-2 -right-2 bg-orange text-white rounded-full w-5 h-5 text-[11px] flex items-center justify-center">
-              10
+              {totalQuantities}
             </p>
           </div>
-          <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
+          <Cart showCart={showCart} setShowCart={setShowCart} />
 
           <span
-            onClick={() => setMenuIsOpen(true)}
+            onClick={() => setShowNavbar(true)}
             className="cursor-pointer rounded-full md:hidden text-2xl dark:text-black  dark:hover:text-orange hover:text-orange"
           >
             <FiMenu />

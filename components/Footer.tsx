@@ -49,7 +49,13 @@ const Footer = () => {
       </div>
 
       <div className="w-full text-center text-xs sm:text-sm border-t text-light-black/90 py-5 sm:mt-16 mt-10">
-        <p>Copyright © All rights reserved - ShopCheck ${date}</p>
+        <p>
+          Copyright © All rights reserved -{" "}
+          <Link href="https://shopcheck.vercel.app/" className="text-orange">
+            ShopCheck
+          </Link>{" "}
+          {date}
+        </p>
       </div>
     </div>
   );
