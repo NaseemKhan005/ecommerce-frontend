@@ -10,9 +10,16 @@ import CommonButton from "./CommonButton";
 import QuantityButtons from "./QuantityButtons";
 import { useStateContext } from "@/context/StateContext";
 import { urlFor } from "@/lib/client";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 const Cart = ({ showCart, setShowCart }: any) => {
-  const { totalQuantities, totalPrice, cartItems }: any = useStateContext();
+  const {
+    totalQuantities,
+    totalPrice,
+    cartItems,
+    toggleCartItemQuantity,
+    onRemove,
+  }: any = useStateContext();
 
   return (
     <div className="relative">
@@ -68,23 +75,29 @@ const Cart = ({ showCart, setShowCart }: any) => {
                           ${item.discountPrice}.00
                         </span>
                         <div className="flex items-center gap-3 justify-between">
-                          {/* <<div className="flex items-center justify-between w-[120px] border">
-                        <AiOutlineMinus
-                          onClick={() => setAddItems(addItems - 1)}
-                          className="cursor-pointer text-red-600 hover:bg-red-600/20 text-3xl border-r p-1"
-                        />
-                        <span>
-                          {addItems <= 0
-                            ? `${setAddItems(addItems + 1)}`
-                            : addItems}
-                        </span>
-                        <AiOutlinePlus
-                          onClick={() => setAddItems(addItems + 1)}
-                          className="text-green-500 hover:bg-green-500/20 cursor-pointer text-3xl border-l p-1"
-                        />
-                      </div>> */}
-                          <QuantityButtons />
-                          <RiDeleteBinLine className="hover:text-red-600 cursor-pointer text-xl" />
+                          <div
+                            className={cn(
+                              "select-none flex items-center justify-between w-[120px] border rounded-full"
+                            )}
+                          >
+                            <AiOutlineMinus
+                              onClick={() =>
+                                toggleCartItemQuantity(item._id, "dec")
+                              }
+                              className="cursor-pointer text-red-600 hover:bg-red-600/20 text-3xl p-1 pl-2 rounded-l-full"
+                            />
+                            <span>{item.quantity}</span>
+                            <AiOutlinePlus
+                              onClick={() =>
+                                toggleCartItemQuantity(item._id, "inc")
+                              }
+                              className="text-green-500 hover:bg-green-500/20 cursor-pointer text-3xl p-1 pr-2 rounded-r-full"
+                            />
+                          </div>
+                          <RiDeleteBinLine
+                            onClick={() => onRemove(item)}
+                            className="hover:text-red-600 cursor-pointer text-xl"
+                          />
                         </div>
                       </div>
                     </div>

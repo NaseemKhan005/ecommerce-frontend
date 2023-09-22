@@ -86,7 +86,7 @@ const Product = ({ product }: any) => {
           )}
         </div>
 
-        {!(discountPrice && discountPrice.length) ? (
+        {discountPrice && discountPrice.length && (
           <div className="flex items-center gap-4">
             <p className="font-semibold text-light-black/80 dark:text-white">
               ${discountPrice}.00
@@ -95,7 +95,8 @@ const Product = ({ product }: any) => {
               ${actualPrice}.00
             </s>
           </div>
-        ) : (
+        )}
+        {!(discountPrice && discountPrice.length) && (
           <p className="font-semibold text-light-black/80">${actualPrice}.00</p>
         )}
       </div>

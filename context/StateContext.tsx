@@ -23,6 +23,8 @@ type ContextType = {
   incQty: () => void;
   decQty: () => void;
   onAdd: (product: Product, quantity: number) => void;
+  toggleCartItemQuantity: (id: number, value: string) => void;
+  onRemove: (product: any) => void;
 };
 
 // Create a React context with an initial empty object of type ContextType
@@ -35,6 +37,9 @@ export const StateContext = ({ children }: { children: React.ReactNode }) => {
   const [totalQuantities, setTotalQuantities] = useState<number>(0);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [qty, setQty] = useState(1);
+
+  let findProduct: any;
+  let index;
 
   const onAdd = (product: any, quantity: number) => {
     const checkProductInCart = cartItems.find(
@@ -64,6 +69,35 @@ export const StateContext = ({ children }: { children: React.ReactNode }) => {
     toast.success(`${quantity} ${product.name} added to cart.`);
   };
 
+  const onRemove = (product: any) => {
+    findProduct = cartItems.find((item: any) => item._id === product._id);
+    const tempCart = cartItems.filter((item: any) => item._id !== product._id);
+    setTotalPrice(totalPrice - findProduct.price * findProduct.quantity);
+    setTotalQuantities(totalQuantities - findProduct.quantity);
+    setCartItems(tempCart);
+  };
+
+  const toggleCartItemQuantity = (id: number, value: string) => {
+    findProduct = cartItems.find((item: any) => item._id === id);
+    index = cartItems.findIndex((product: any) => product._id === id);
+
+    if (value === "inc") {
+      findProduct.quantity += 1;
+      cartItems[index] = findProduct;
+      setTotalPrice(totalPrice + findProduct.discountPrice);
+      setTotalQuantities(totalQuantities + 1);
+    }
+
+    if (value === "dec") {
+      if (findProduct.quantity > 1) {
+        findProduct.quantity -= 1;
+        cartItems[index] = findProduct;
+        setTotalPrice(totalPrice - findProduct.discountPrice);
+        setTotalQuantities(totalQuantities - 1);
+      }
+    }
+  };
+
   const incQty = () => {
     setQty((prevQty: number) => prevQty + 1);
   };
@@ -90,6 +124,8 @@ export const StateContext = ({ children }: { children: React.ReactNode }) => {
         incQty,
         decQty,
         onAdd,
+        toggleCartItemQuantity,
+        onRemove,
       }}
     >
       {children}
