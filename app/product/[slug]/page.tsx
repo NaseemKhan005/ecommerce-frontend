@@ -1,9 +1,7 @@
-import Image from "next/image";
-import { AiFillStar, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
 
-import { client, urlFor } from "@/lib/client";
+import { client } from "@/lib/client";
 import { cn } from "@/lib/utils";
-import CommonButton from "@/components/CommonButton";
 import Product from "@/components/Product";
 import ProductDetailsImage from "@/components/ProductDetailsImage";
 import QuantityButtons from "@/components/QuantityButtons";
@@ -70,7 +68,6 @@ const ProductDetails = async ({ params: { slug } }: any) => {
 
           <div className="flex items-center gap-3 mt-1 lg:mt-3 mb-3 lg:mb-6">
             <h3 className="font-semibold text-xl">Quantity:</h3>
-
             <QuantityButtons />
           </div>
 

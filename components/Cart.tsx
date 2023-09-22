@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import Link from "next/link";
 import { IoClose } from "react-icons/io5";
 import { RiDeleteBinLine } from "react-icons/ri";
 
@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 import CommonButton from "./CommonButton";
 import QuantityButtons from "./QuantityButtons";
 import { useStateContext } from "@/context/StateContext";
-import Link from "next/link";
 import { urlFor } from "@/lib/client";
 
 const Cart = ({ showCart, setShowCart }: any) => {

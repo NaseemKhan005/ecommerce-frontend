@@ -38,7 +38,7 @@ export const StateContext = ({ children }: { children: React.ReactNode }) => {
       setCartItems([...cartItems, updatedProduct]);
     }
 
-    toast.success(`${quantity} ${product.name} items added to cart.`);
+    toast.success(`${quantity} ${product.name} added to cart.`);
   };
 
   const incQty = () => {

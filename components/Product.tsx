@@ -11,10 +11,12 @@ import StockButton from "./StockButton";
 import { cn } from "@/lib/utils";
 import { useStateContext } from "@/context/StateContext";
 import { Button } from "./ui/button";
+import { IoClose } from "react-icons/io5";
 
 const Product = ({ product }: any) => {
   const [showIcons, setShowIcons] = useState(false);
   const [showImage, setShowImage] = useState(false);
+  const [toggleProductImage, setToggleProductImage] = useState(false);
 
   const {
     image,
@@ -149,11 +151,34 @@ const Product = ({ product }: any) => {
         />
       </Button>
       <AiOutlineEye
+        onClick={() => setToggleProductImage(true)}
         className={cn(
           "bg-white border rounded-full text-light-black/80 hover:text-white hover:bg-orange p-2 text-[2.5rem] cursor-pointer absolute bottom-32 transition-all duration-500 delay-150",
           showIcons ? "left-5 opacity-100" : "-left-5 opacity-0"
         )}
       />
+
+      {toggleProductImage && (
+        <div className="w-full h-screen bg-black/80 fixed top-0 left-0 z-[100]">
+          <div className="relative w-full h-full md:p-0 p-4 flex items-center justify-center">
+            <button
+              type="submit"
+              onClick={() => setToggleProductImage(false)}
+              className="rounded-full text-white text-3xl sm:text-4xl hover:bg-white hover:text-black p-2 absolute top-20 sm:top-10 sm:right-16 right-2 hover:rotate-180 transition-all duration-500"
+            >
+              <IoClose />
+            </button>
+
+            <Image
+              src={`${urlFor(image[0].asset)}`}
+              alt={name}
+              width={500}
+              height={500}
+              className="w-[25rem] 2xl:w-[35rem] object-center object-contain bg-white"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
