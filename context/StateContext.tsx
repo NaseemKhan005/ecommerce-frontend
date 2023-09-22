@@ -31,11 +31,13 @@ type ContextType = {
 const Context = createContext<ContextType | undefined>(undefined);
 
 export const StateContext = ({ children }: { children: React.ReactNode }) => {
-  const getLocalStorage = (name: string) => {
+  const getLocalStorage = (name: string): any => {
     if (typeof window !== "undefined") {
       const storage = localStorage.getItem(name);
 
-      if (storage) return JSON.parse(localStorage.getItem(name));
+      if (storage !== null) {
+        return JSON.parse(storage);
+      }
 
       if (name === "cartItems") return [];
 
