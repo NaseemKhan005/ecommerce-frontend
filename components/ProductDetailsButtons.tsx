@@ -12,23 +12,35 @@ const ProductDetailsButtons = ({
   stock,
   product,
 }: ProductDetailsButtonsProps) => {
-  const { onAdd, qty }: any = useStateContext();
+  const { onAdd, qty, setShowCart }: any = useStateContext();
 
   return (
-    <div className="flex items-center gap-8">
-      <CommonButton
-        onClick={() => onAdd(product, qty)}
-        stock={stock}
-        text="Add to cart"
-        customClasses="w-44 py-6 before:w-4 after:w-0 rounded text-base capitalize"
-      />
+    <div className="flex items-center gap-2 sm:gap-5 md:gap-8">
+      <button
+        onClick={() => {
+          onAdd(product, qty);
+          setShowCart(true);
+        }}
+      >
+        <CommonButton
+          stock={stock}
+          text="Add to cart"
+          customClasses="md:w-44 py-6 before:w-4 after:w-0 rounded text-sm md:text-base capitalize"
+        />
+      </button>
 
-      <CommonButton
-        onClick={() => onAdd(product, qty)}
-        stock={stock}
-        text="Buy now"
-        customClasses="w-44 hover:bg-[#d93237] bg-orange text-white py-6 rounded before:w-4 text-sm after:w-0"
-      />
+      <button
+        onClick={() => {
+          onAdd(product, qty);
+          setShowCart(true);
+        }}
+      >
+        <CommonButton
+          stock={stock}
+          text="Buy now"
+          customClasses="md:w-44 hover:bg-[#d93237] bg-orange text-white py-6 rounded before:w-4 text-xs md:text-sm after:w-0"
+        />
+      </button>
     </div>
   );
 };
