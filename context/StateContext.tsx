@@ -3,12 +3,35 @@
 import { createContext, useContext, useState } from "react";
 import toast from "react-hot-toast";
 
-const Context = createContext();
+type Product = {
+  _id: string;
+  name: string;
+  discountPrice: number;
+  quantity: number;
+};
+
+// Defining a type for the context data
+type ContextType = {
+  showNavbar: boolean;
+  setShowNavbar: React.Dispatch<React.SetStateAction<boolean>>;
+  showCart: boolean;
+  setShowCart: React.Dispatch<React.SetStateAction<boolean>>;
+  cartItems: Product[];
+  totalQuantities: number;
+  totalPrice: number;
+  qty: number;
+  incQty: () => void;
+  decQty: () => void;
+  onAdd: (product: Product, quantity: number) => void;
+};
+
+// Create a React context with an initial empty object of type ContextType
+const Context = createContext<ContextType | undefined>(undefined);
 
 export const StateContext = ({ children }: { children: React.ReactNode }) => {
   const [showNavbar, setShowNavbar] = useState(false);
   const [showCart, setShowCart] = useState(false);
-  const [cartItems, setCartItems] = useState<any[]>([]);
+  const [cartItems, setCartItems] = useState<Product[]>([]);
   const [totalQuantities, setTotalQuantities] = useState<number>(0);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [qty, setQty] = useState(1);
