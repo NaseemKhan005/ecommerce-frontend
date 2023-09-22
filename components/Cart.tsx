@@ -7,7 +7,6 @@ import { RiDeleteBinLine } from "react-icons/ri";
 
 import { cn } from "@/lib/utils";
 import CommonButton from "./CommonButton";
-import QuantityButtons from "./QuantityButtons";
 import { useStateContext } from "@/context/StateContext";
 import { urlFor } from "@/lib/client";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
@@ -50,7 +49,7 @@ const Cart = ({ showCart, setShowCart }: any) => {
               />
             </div>
 
-            {cartItems.length >= 1 ? (
+            {cartItems && cartItems.length >= 1 ? (
               <div className="flex flex-col justify-between gap-8 w-full min-h-[23.65rem] select-none">
                 {cartItems.map((item: any) => (
                   <div

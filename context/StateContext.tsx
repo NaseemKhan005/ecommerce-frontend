@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 type Product = {
@@ -27,16 +27,40 @@ type ContextType = {
   onRemove: (product: any) => void;
 };
 
-// Create a React context with an initial empty object of type ContextType
+// Creating a React context with an initial empty object of type ContextType
 const Context = createContext<ContextType | undefined>(undefined);
 
 export const StateContext = ({ children }: { children: React.ReactNode }) => {
+  const getLocalStorage = (name: string) => {
+    if (typeof window !== "undefined") {
+      const storage = localStorage.getItem(name);
+
+      if (storage) return JSON.parse(localStorage.getItem(name));
+
+      if (name === "cartItems") return [];
+
+      return 0;
+    }
+  };
+
   const [showNavbar, setShowNavbar] = useState(false);
   const [showCart, setShowCart] = useState(false);
-  const [cartItems, setCartItems] = useState<Product[]>([]);
-  const [totalQuantities, setTotalQuantities] = useState<number>(0);
-  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [cartItems, setCartItems] = useState<Product[]>(
+    getLocalStorage("cartItems")
+  );
+  const [totalQuantities, setTotalQuantities] = useState<number>(
+    getLocalStorage("totalQuantities")
+  );
+  const [totalPrice, setTotalPrice] = useState<number>(
+    getLocalStorage("totalPrice")
+  );
   const [qty, setQty] = useState(1);
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+    localStorage.setItem("totalQuantities", JSON.stringify(totalQuantities));
+  }, [cartItems, totalPrice, totalQuantities]);
 
   let findProduct: any;
   let index;
